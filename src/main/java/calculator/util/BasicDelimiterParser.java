@@ -13,7 +13,7 @@ public class BasicDelimiterParser implements DelimiterParser {
 
     @Override
     public String[] splits(String input) {
-        if (input.isBlank()) {
+        if (input.isEmpty()) {
             return new String[]{"0",};
         }
         if (isNotStartOrEndWithNumbers(input)) {
