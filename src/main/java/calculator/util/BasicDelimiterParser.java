@@ -13,6 +13,9 @@ public class BasicDelimiterParser implements DelimiterParser {
 
     @Override
     public String[] splits(String input) {
+        if (input.isBlank()) {
+            return new String[]{"0",};
+        }
         if (isNotStartOrEndWithNumbers(input)) {
             throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
         }

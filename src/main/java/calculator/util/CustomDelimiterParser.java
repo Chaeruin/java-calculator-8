@@ -5,6 +5,14 @@ import java.util.regex.Matcher;
 
 public class CustomDelimiterParser implements DelimiterParser {
 
+    private static String getIsPeriod(Matcher matcher) {
+        String customDelimiter = matcher.group(1);
+        if (customDelimiter.equals(".")) {
+            customDelimiter = "\\.";
+        }
+        return customDelimiter;
+    }
+
     @Override
     public boolean isCustomDelimiter(String input) {
         Matcher matcher = DELIMITER_PATTERN.matcher(input);
@@ -13,24 +21,18 @@ public class CustomDelimiterParser implements DelimiterParser {
 
     @Override
     public String[] splits(String input) {
-        if (input.isBlank()) {
-            return new String[]{};
-        }
-
         String regulationInput = input.replace("\\n", "\n");
         Matcher matcher = DELIMITER_PATTERN.matcher(regulationInput);
 
-        String customDelimiter = matcher.group(1);
+        String customDelimiter = getIsPeriod(matcher);
         String otherNumbers = matcher.group(2);
 
         if (isNotStartOrEndWithNumbers(otherNumbers, customDelimiter)) {
             throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
         }
-
         if (!isFitDelimiter(otherNumbers, customDelimiter)) {
             throw new IllegalArgumentException(ErrorCode.DIFFERENT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
-
         return otherNumbers.split(customDelimiter);
     }
 
