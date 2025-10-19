@@ -18,7 +18,7 @@ public class BasicDelimiterParser implements DelimiterParser {
         }
 
         if (!isFitDelimiter(input)) {
-            throw new IllegalArgumentException(ErrorCode.DIFFERENT_CUSTOM_DELIMITER_INPUT.getErrorName());
+            throw new IllegalArgumentException(ErrorCode.IS_NOT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
 
         return input.split("[,:]");
