@@ -10,7 +10,7 @@ public class InputValidator {
                 if (num.isEmpty()) {
                     throw new IllegalArgumentException(ErrorCode.ENTERED_DELIMITER_CONTINUOUS.getErrorName());
                 }
-                double convertNum = Double.parseDouble(num);
+                int convertNum = Integer.parseInt(num);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -18,7 +18,7 @@ public class InputValidator {
         }
     }
 
-    public boolean validateIsNumberPositive(double number) {
+    public boolean validateIsNumberPositive(int number) {
         if (number <= 0) {
             throw new IllegalArgumentException(ErrorCode.IS_NOT_POSITIVE_NUMBER.getErrorName());
         }

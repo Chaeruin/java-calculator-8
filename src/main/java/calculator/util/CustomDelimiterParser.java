@@ -16,7 +16,7 @@ public class CustomDelimiterParser implements DelimiterParser {
         String regulationInput = input.replace("\\n", "\n");
         Matcher matcher = DELIMITER_PATTERN.matcher(regulationInput);
 
-        String customDelimiter = getIsPeriod(matcher);
+        String customDelimiter = matcher.group(1);
         String otherNumbers = matcher.group(2);
 
         if (isNotStartOrEndWithNumbers(otherNumbers, customDelimiter)) {
@@ -26,14 +26,6 @@ public class CustomDelimiterParser implements DelimiterParser {
             throw new IllegalArgumentException(ErrorCode.DIFFERENT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
         return otherNumbers.split(customDelimiter);
-    }
-
-    private String getIsPeriod(Matcher matcher) {
-        String customDelimiter = matcher.group(1);
-        if (customDelimiter.equals(".")) {
-            customDelimiter = "\\.";
-        }
-        return customDelimiter;
     }
 
     private boolean isFitDelimiter(String otherNumbers, String delimiter) {

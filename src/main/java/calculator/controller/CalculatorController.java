@@ -26,7 +26,7 @@ public class CalculatorController {
         if (delimiterParser.isCustomDelimiter(input)) {
             delimiterParser = new CustomDelimiterParser();
         }
-        double doubleResult = calculator.calculate(delimiterParser.splits(input));
-        outputView.printCalculateResult(calculator.getResult(doubleResult));
+        int result = calculator.calculate(delimiterParser.splits(input));
+        outputView.printCalculateResult(result);
     }
 }

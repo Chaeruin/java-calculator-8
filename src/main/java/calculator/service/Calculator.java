@@ -11,12 +11,12 @@ public class Calculator {
         this.inputValidator = new InputValidator();
     }
 
-    public double calculate(String[] splitNumbers) {
-        double[] convertDouble = getStringToDoubles(splitNumbers);
+    public int calculate(String[] splitNumbers) {
+        int[] convertDouble = getStringToDoubles(splitNumbers);
 
-        double result = 0;
+        int result = 0;
 
-        for (double num : convertDouble) {
+        for (int num : convertDouble) {
             if (inputValidator.validateIsNumberPositive(num)) {
                 result += num;
             }
@@ -24,13 +24,13 @@ public class Calculator {
         return result;
     }
 
-    private double[] getStringToDoubles(String[] splitNumbers) {
+    private int[] getStringToDoubles(String[] splitNumbers) {
         if (inputValidator.validateIsNumber(splitNumbers)) {
             return Arrays.stream(splitNumbers)
-                    .mapToDouble(Double::parseDouble)
+                    .mapToInt(Integer::parseInt)
                     .toArray();
         }
-        return new double[]{};
+        return new int[]{};
     }
 
     public boolean isResultInteger(double result) {
@@ -38,11 +38,4 @@ public class Calculator {
         return convertInteger == result;
     }
 
-    public String getResult(double result) {
-        if (isResultInteger(result)) {      // 결과가 정수일 때
-            return String.valueOf((int) result);
-        }
-        // 결과가 소수일때
-        return String.valueOf(result);
-    }
 }
