@@ -16,21 +16,30 @@ public class CustomDelimiterParser implements DelimiterParser {
     public String[] splits(String input) {
         input = input.replace("\\n", "\n");
         Matcher matcher = DELIMITER_PATTERN.matcher(input);
-        
         if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorCode.IS_NOT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
-
         String customDelimiter = matcher.group(1);
         String otherNumbers = matcher.group(2);
+        judgeValidInput(otherNumbers, customDelimiter);
+        if (isPeriod(matcher)) {
+            return otherNumbers.split("\\.");
+        }
+        return otherNumbers.split(customDelimiter);
+    }
 
+    private void judgeValidInput(String otherNumbers, String customDelimiter) {
         if (isNotStartOrEndWithNumbers(otherNumbers, customDelimiter)) {
             throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
         }
         if (!isFitDelimiter(otherNumbers, customDelimiter)) {
             throw new IllegalArgumentException(ErrorCode.DIFFERENT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
-        return otherNumbers.split(customDelimiter);
+    }
+
+    private boolean isPeriod(Matcher matcher) {
+        String customDelimiter = matcher.group(1);
+        return customDelimiter.equals(".");
     }
 
     private boolean isFitDelimiter(String otherNumbers, String delimiter) {
