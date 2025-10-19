@@ -1,5 +1,6 @@
 package calculator.util;
 
+import calculator.enums.ErrorCode;
 import java.util.regex.Matcher;
 
 public class CustomDelimiterParser implements DelimiterParser {
@@ -22,6 +23,14 @@ public class CustomDelimiterParser implements DelimiterParser {
         String customDelimiter = matcher.group(1);
         String otherNumbers = matcher.group(2);
 
+        if (isNotStartOrEndWithNumbers(otherNumbers, customDelimiter)) {
+            throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
+        }
+
         return otherNumbers.split(customDelimiter);
+    }
+
+    private boolean isNotStartOrEndWithNumbers(String otherNumbers, String customDelimiter) {
+        return otherNumbers.startsWith(customDelimiter) || otherNumbers.endsWith(customDelimiter);
     }
 }
