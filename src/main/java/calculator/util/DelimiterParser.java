@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public interface DelimiterParser {
 
-    Pattern DELIMITER_PATTERN = Pattern.compile("//(.*)\\n");
+    Pattern DELIMITER_PATTERN = Pattern.compile("//(.)\\n");
 
     boolean isCustomDelimiter(String input);
 
