@@ -7,6 +7,9 @@ public class InputValidator {
     public boolean validateIsNumber(String[] number) {
         try {
             for (String num : number) {
+                if (num.isEmpty()) {
+                    throw new IllegalArgumentException(ErrorCode.ENTERED_DELIMITER_CONTINUOUS.getErrorName());
+                }
                 double convertNum = Double.parseDouble(num);
             }
             return true;
