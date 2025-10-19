@@ -25,7 +25,7 @@ public class Calculator {
     }
 
     private double[] getStringToDoubles(String[] splitNumbers) {
-        if (!inputValidator.validateIsNumber(splitNumbers)) {
+        if (inputValidator.validateIsNumber(splitNumbers)) {
             return Arrays.stream(splitNumbers)
                     .mapToDouble(Double::parseDouble)
                     .toArray();

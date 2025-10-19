@@ -19,7 +19,6 @@ public class BasicDelimiterParser implements DelimiterParser {
         if (isNotStartOrEndWithNumbers(input)) {
             throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
         }
-
         if (!isFitDelimiter(input)) {
             throw new IllegalArgumentException(ErrorCode.IS_NOT_CUSTOM_DELIMITER_INPUT.getErrorName());
         }
