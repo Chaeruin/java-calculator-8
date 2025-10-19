@@ -7,14 +7,19 @@ public class CustomDelimiterParser implements DelimiterParser {
 
     @Override
     public boolean isCustomDelimiter(String input) {
+        input = input.replace("\\n", "\n");
         Matcher matcher = DELIMITER_PATTERN.matcher(input);
         return matcher.find();
     }
 
     @Override
     public String[] splits(String input) {
-        String regulationInput = input.replace("\\n", "\n");
-        Matcher matcher = DELIMITER_PATTERN.matcher(regulationInput);
+        input = input.replace("\\n", "\n");
+        Matcher matcher = DELIMITER_PATTERN.matcher(input);
+        
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(ErrorCode.IS_NOT_CUSTOM_DELIMITER_INPUT.getErrorName());
+        }
 
         String customDelimiter = matcher.group(1);
         String otherNumbers = matcher.group(2);

@@ -7,6 +7,7 @@ public class BasicDelimiterParser implements DelimiterParser {
 
     @Override
     public boolean isCustomDelimiter(String input) {
+        input = input.replace("\\n", "\n");
         Matcher matcher = DELIMITER_PATTERN.matcher(input);
         return matcher.find();
     }
