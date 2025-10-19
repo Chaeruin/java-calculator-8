@@ -12,12 +12,7 @@ public class Calculator {
     }
 
     public double calculate(String[] splitNumbers) {
-        double[] convertDouble = new double[]{};
-        if (inputValidator.validateIsNumber(splitNumbers)) {
-            convertDouble = Arrays.stream(splitNumbers)
-                    .mapToDouble(Double::parseDouble)
-                    .toArray();
-        }
+        double[] convertDouble = getStringToDoubles(splitNumbers);
 
         double result = 0;
 
@@ -27,6 +22,15 @@ public class Calculator {
             }
         }
         return result;
+    }
+
+    private double[] getStringToDoubles(String[] splitNumbers) {
+        if (inputValidator.validateIsNumber(splitNumbers)) {
+            return Arrays.stream(splitNumbers)
+                    .mapToDouble(Double::parseDouble)
+                    .toArray();
+        }
+        return null;
     }
 
     public boolean isResultInteger(double result) {
