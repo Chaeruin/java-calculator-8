@@ -1,5 +1,6 @@
 package calculator.service;
 
+import calculator.enums.ErrorCode;
 import calculator.util.InputValidator;
 import java.util.Arrays;
 
@@ -16,11 +17,12 @@ public class Calculator {
 
         int result = 0;
 
-        for (int num : convertDouble) {
-            if (inputValidator.validateIsNumberPositive(num)) {
-                result += num;
-            }
+        try {
+            result = Math.addExact(result, Arrays.stream(convertDouble).sum());
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException(ErrorCode.INVALID_RANGE_INTEGER.getErrorName());
         }
+
         return result;
     }
 
@@ -32,10 +34,4 @@ public class Calculator {
         }
         return new int[]{};
     }
-
-    public boolean isResultInteger(double result) {
-        int convertInteger = (int) result;
-        return convertInteger == result;
-    }
-
 }

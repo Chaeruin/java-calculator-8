@@ -176,4 +176,22 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    @DisplayName("띄어쓰기 구분자에 대하여 정상 처리함")
+    void test16() {
+        assertSimpleTest(() -> {
+            run("// \\n1 2 3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    @DisplayName("그러나, 띄어쓰기 구분자도 연속될 경우 예외")
+    void test17() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("// \\n1  2    3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }
