@@ -11,6 +11,7 @@ public class InputValidator {
                     throw new IllegalArgumentException(ErrorCode.ENTERED_DELIMITER_CONTINUOUS.getErrorName());
                 }
                 int convertNum = Integer.parseInt(num);
+                validateIsNumberPositive(convertNum);
             }
             return true;
         } catch (NumberFormatException e) {
