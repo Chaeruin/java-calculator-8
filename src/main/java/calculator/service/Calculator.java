@@ -18,7 +18,9 @@ public class Calculator {
         int result = 0;
 
         try {
-            result = Math.addExact(result, Arrays.stream(convertDouble).sum());
+            for (int number : convertDouble) {
+                result = Math.addExact(result, number);
+            }
         } catch (ArithmeticException e) {
             throw new IllegalArgumentException(ErrorCode.INVALID_RANGE_INTEGER.getErrorName());
         }

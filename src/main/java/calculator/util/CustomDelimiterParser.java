@@ -32,24 +32,11 @@ public class CustomDelimiterParser implements DelimiterParser {
         if (isNotStartOrEndWithNumbers(otherNumbers, customDelimiter)) {
             throw new IllegalArgumentException(ErrorCode.INVALID_POSITION_OF_DELIMITER.getErrorName());
         }
-        if (!isFitDelimiter(otherNumbers, customDelimiter)) {
-            throw new IllegalArgumentException(ErrorCode.DIFFERENT_CUSTOM_DELIMITER_INPUT.getErrorName());
-        }
     }
 
     private boolean isPeriod(Matcher matcher) {
         String customDelimiter = matcher.group(1);
         return customDelimiter.equals(".");
-    }
-
-    private boolean isFitDelimiter(String otherNumbers, String delimiter) {
-        char[] numbers = otherNumbers.toCharArray();
-        for (int i = 1; i < numbers.length; i += 2) {
-            if (numbers[i] != delimiter.charAt(0)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private boolean isNotStartOrEndWithNumbers(String otherNumbers, String customDelimiter) {
