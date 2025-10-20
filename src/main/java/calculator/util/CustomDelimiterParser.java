@@ -21,11 +21,21 @@ public class CustomDelimiterParser implements DelimiterParser {
         }
         String customDelimiter = matcher.group(1);
         String otherNumbers = matcher.group(2);
+        judgeIsDelimiterString(customDelimiter);
         judgeValidInput(otherNumbers, customDelimiter);
         if (isPeriod(matcher)) {
             return otherNumbers.split("\\.");
         }
         return otherNumbers.split(customDelimiter);
+    }
+
+    private void judgeIsDelimiterString(String customDelimiter) {
+        try {
+            Integer.parseInt(customDelimiter);
+        } catch (NumberFormatException e) {
+            return;
+        }
+        throw new IllegalArgumentException(ErrorCode.INVALID_DELIMITER_IS_NOT_STRING.getErrorName());
     }
 
     private void judgeValidInput(String otherNumbers, String customDelimiter) {
