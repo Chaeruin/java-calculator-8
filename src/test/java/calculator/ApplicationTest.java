@@ -212,4 +212,13 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    @DisplayName("숫자 구분자 입력 예외")
+    void test20() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//0\\n1000200"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }
