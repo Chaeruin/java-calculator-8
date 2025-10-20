@@ -194,4 +194,22 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+    @Test
+    @DisplayName("int 범위 넘음 (한번에 입력된 숫자)")
+    void test18() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("9000000000"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    @DisplayName("int 범위 넘음 (더한 숫자)")
+    void test19() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1000000000:1200000000"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 }
